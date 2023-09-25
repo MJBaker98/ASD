@@ -1,0 +1,2 @@
+model_checkpoint_path: "ASD_LSTM_Weights"
+all_model_checkpoint_paths: "ASD_LSTM_Weights"
