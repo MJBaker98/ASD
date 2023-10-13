@@ -3,10 +3,8 @@ Class that contains the model information and other necessary information for th
 implementation of the ASD language model
 Properties
     - tfModel : tensorflow/keras sequential model 
-    - vocab_size : int representing the number of words in the model
-    - sequence_length : int representing how many tokens were used to parse out letters
-                        (i.e. 2-gram vs 3-gram would be 2 or 3 respectively)
-
+    - tokenizer : keras tokenizer object with the vocab list and tokens
+    - sequence_length : the size of the n-gram model
 
 '''
 
@@ -29,7 +27,7 @@ class ASD_TF_Object:
         self.sequence_length = 3 # the model implemented a 3-gram methodology to train, so retain that here to ensure proper input size dimensions
 
         # load tokenizer
-        with open('../Language_Model/Finalized_Model/tokenizer.pickle', 'rb') as handle:
+        with open('./Finalized_Model/tokenizer.pickle', 'rb') as handle:
             self.tokenizer = pickle.load(handle)
 
         # create an instance of the model
@@ -37,7 +35,7 @@ class ASD_TF_Object:
 
     def __createModel(self,vocab_size, sequence_length):
         '''
-        This function creates an empty model with the same parameters as the one that was trained for the ASD
+        This function creates an empty model with the necessary layers and parameters
         '''
         model = Sequential()
         model.add(Embedding(vocab_size, 50, input_length=sequence_length))
@@ -66,7 +64,7 @@ class ASD_TF_Object:
         Input_as_sequence = self.tokenizer.texts_to_sequence([InputString])[0]
         
         # append empty space to allow the model to predict for less than 3 word inputs
-        # - TODO: look into how bad these reseults are
+        # - TODO: look into how much this simplification effects the quality of results
         while len(test_sequence) < self.sequence_length:
             test_sequence = [0, *test_sequence]
         

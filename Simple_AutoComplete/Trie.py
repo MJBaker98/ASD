@@ -14,12 +14,12 @@ from ASD_LSTM_Model import ASD_TF_Object
 class Trie:
     '''
     The autocomplete algorithm of the assisted speech app will make use of a Trie data structure
-    This class works in tandum with the CharacterNode class
+    This class works in tandem with the CharacterNode class
     '''
     
     def __init__(self) -> None:
         '''
-        Construct an instance of the AssistedSpeachApplication
+        Construct an instance of the Trie class
         '''
         with open("./Wordlist_Spanish.txt",'r') as fid:
             lines = fid.readlines()
@@ -130,7 +130,6 @@ class Trie:
             indexOfChar = ord(C.lower()) - T.AValue
             T = T.Alphabet[indexOfChar]
             if T == 0:
-                print('No hay una palabra con esta prefijo ...')
                 return(-1)
             else:
                 continue
@@ -138,23 +137,11 @@ class Trie:
         # search through trie for all words that could come from the provided prefix
         out = self.__throughSearch(T, userStr,[])
         
-        # Query the ASD_NN to get a list of the predicted words -- this list is limited in size to 50 words
-        # not implemented here yet - still figuring out functional flow between classes
-        '''
-        # This code will maybe be used in the future to do the model query
-        # search the array of words from the trie to see if they contian any shared elements
-        trieWordSet = set([out[x][0] for x in range(nReturns)])
-        nnWordSet = set(nnPredictions)
-        commonWordSet = trieWordSet.intersection(nnWordSet)
-
-        if commonWordSet:
-            # if there are words in common, find their index in the out array
-
-        '''
+        # sort results from highest to lowest based off of the word weights
         out.sort(key=lambda x:x[1], reverse=True)
 
         # at this point the list contains n tuples of length 2 where index 0 is the word and index 1 is the weight
-        # we only care for the words at this point
+        # we only care for the words
 
         return([out[x][0] for x in range(nReturns)])
     

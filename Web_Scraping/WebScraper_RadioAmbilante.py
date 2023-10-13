@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-# the radioambulante names for the files are all the same, so maybe i can automate this to get a huge set of word data quickly
-
 # Get the HTML of the website
 url = 'https://radioambulante.org/category/audio/episodios'
 titleList = []
@@ -37,7 +35,7 @@ for B in ButtonLinks:
         if splitAtItemprop[0][1:-1] not in buttonList:
             buttonList.append(splitAtItemprop[0][1:-1])
 
-# after this I have a list of links that are themselves html pointers to other pages full of articles
+# after this I have a list of links that are themselves addresses to other pages full of articles
 # loop through these, run the same algorithm again
 for Link in buttonList:
     # loop through buttons and get more titles
@@ -62,7 +60,7 @@ for Link in buttonList:
         else:
             continue
 
-# Now we have a whole bunch of html links that each point to an article on the website 
+# Now we have a whole bunch of links that each point to an article on the website 
 # We need to dig one level deeper to get to the transcripts
 transcripList = []
 MasterTextList = []
@@ -108,7 +106,7 @@ for T in titleList:
 
 MasterText = " ".join(MasterTextList)
 
-outFileLocation = '//Users//michael//Documents//Programming//Python//Simple_AutoComplete//Transcripts.txt'
+outFileLocation = 'Transcripts.txt'
 fileID = open(outFileLocation,'w')
 fileID.write(MasterText)
 fileID.close()

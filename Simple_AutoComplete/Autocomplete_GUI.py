@@ -94,7 +94,7 @@ class GUI(ASA):
         # store the keyboard layout for other functions
         self.Keyboard_Layout = button_labels
 
-        # store the list of buttons as part of the app data -- makes it easier to implement the arrow key implementation
+        # store the list of buttons as part of the app data 
         self.buttonList = []
 
         # create a list that will associate the flattened button array with the positions of the letters in the keyboard layout
@@ -171,7 +171,7 @@ class GUI(ASA):
         elif direction == "down":
             # increase first element of coordinate by one (if possible)
             canGoDown = focus_coordinates[0] < 3 and current_Letter != "P" and current_Letter != "L" and current_Letter != "M" and current_Letter != "Ñ" and current_Letter != "Del"
-            if canGoDown: # can hardcode this because i know the number of rows in the keyboard
+            if canGoDown: # can hardcode this because I know the number of rows in the keyboard
                 new_x = focus_coordinates[0] + 1
                 new_coordinates = (new_x, focus_coordinates[1])
             else:

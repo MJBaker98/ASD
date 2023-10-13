@@ -33,7 +33,7 @@ class SequenceDataGenerator(Sequence):
 
         return X, to_categorical(y, num_classes = self.vocab_size)
 
-total_Text_Link = '//Users//michael//Documents//Programming//Python//Assisted_Speech_Device//Web_Scraping//Total_Text.txt'
+total_Text_Link = '..//Web_Scraping//Total_Text.txt'
 tt_fid = open(total_Text_Link,'r')
 TotalText = tt_fid.read()
 tt_fid.close()

@@ -50,7 +50,7 @@ for link in embed_element:
                 cleaned_pageText = " ".join(pageTextVector[2:-1])
                 allBookText += cleaned_pageText
 
-outFileLocation = '//Users//michael//Documents//Programming//Python//Web_Scraping//Classic_Books.txt'
+outFileLocation = 'Classic_Books.txt'
 fileID = open(outFileLocation,'w')
 fileID.write(allBookText)
 fileID.close()
